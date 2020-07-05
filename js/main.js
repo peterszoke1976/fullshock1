@@ -33,8 +33,23 @@ function fillDataTable(data, tableID){
             td.innerHTML = row[k];
             tr.appendChild(td);
         }
+        let btnGroup = createBtnGroup();
+        tr.appendChild(btnGroup);
         tBody.appendChild(tr);
     }
+}
+
+function createBtnGroup(){
+    let group = createAnyElement("div", {class: "btn btn-group"});
+    let infoBtn = createAnyElement("button", {class: "btn btn-info"});
+    infoBtn.innerHTML = '<i class="fa fa-refresh" aria-hidden="true"></i>';
+    let deleteBtn = createAnyElement("button", {class: "btn btn-danger"});
+    deleteBtn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
+    group.appendChild(infoBtn);
+    group.appendChild(deleteBtn);
+    let td = createAnyElement("td");
+    td.appendChild(group);
+    return td;
 }
 
 function createAnyElement(name, attributes){
