@@ -12,11 +12,14 @@ function getServerData(url){
     );
 }
 
-document.querySelector("#getDataBtn").addEventListener("click", function() {
+function startGetUsers(){
     getServerData("http://localhost:3000/users").then(
             data => fillDataTable(data, "userTable")
         );
-});
+}
+
+document.querySelector("#getDataBtn").addEventListener("click", startGetUsers);
+    
 
 //Fill table with server data.
 function fillDataTable(data, tableID){
@@ -41,15 +44,34 @@ function fillDataTable(data, tableID){
 
 function createBtnGroup(){
     let group = createAnyElement("div", {class: "btn btn-group"});
-    let infoBtn = createAnyElement("button", {class: "btn btn-info"});
+    let infoBtn = createAnyElement("button", {class: "btn btn-info", onclick: "getInfo(this)"});
     infoBtn.innerHTML = '<i class="fa fa-refresh" aria-hidden="true"></i>';
-    let deleteBtn = createAnyElement("button", {class: "btn btn-danger"});
+    let deleteBtn = createAnyElement("button", {class: "btn btn-danger", onclick: "delRow(this)"});
     deleteBtn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
     group.appendChild(infoBtn);
     group.appendChild(deleteBtn);
     let td = createAnyElement("td");
     td.appendChild(group);
     return td;
+}
+
+function delRow(btn){
+    let tr = btn.parentElement.parentElement.parentElement;
+    let id = tr.querySelector("td:first-child").innerHTML;
+    let fetchOptions = {
+        method: "DELETE",
+        mode: "cors",
+        cache: "no-cache"
+    };
+    
+    fetch(`http://localhost:3000/users/${id}`, fetchOptions).then(
+        resp => resp.json(),
+        err => console.error(err)
+    ).then(
+        data => {
+            startGetUsers();
+        }
+    );
 }
 
 function createAnyElement(name, attributes){
