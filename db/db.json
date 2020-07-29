@@ -1,21 +1,15 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Big Tom",
-      "email": "bigtom@gmail.com"
+      "id": 6,
+      "name": "Little J",
+      "email": "littlejimmy@gmail.com"
     },
     {
-      "id": 2,
-      "name": "Little Tom",
-      "email": "littletom@gmail.com"
+      "name": "Peter",
+      "email": "peterszoke1976@googlemail.com",
+      "id": 8
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "userId": 1
-    }
-  ]
+  "comments": []
 }
